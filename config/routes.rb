@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  # get 'seat/index', to: 'hello_world#index'
-  # get 'seat', to: 'hello_world#index'
-  # get 'movies/index', to: 'hello_world#index'
-  # get 'movies', to: 'seat#index'
-  # get '404', to: 'seat#index'
-  # resources :hello_world
+  namespace :api do
+    get 'movies/index'
+    post 'movies/', to: 'movies#create'
+    put 'movies/', to: 'movies#update'
+    delete 'movies/:id', to: 'movies#destroy'
+  end
+
   resources :movies
 
   match '*path' => redirect('/'), via: :get

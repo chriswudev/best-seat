@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import Layout from './components/layout';
-import Seat from './components/Seat';
-import Movies from './components/Movies';
+import Seat from './pages/Seat';
+import Movies from './pages/Movies';
 
 export default function Router() {
   return useRoutes([
