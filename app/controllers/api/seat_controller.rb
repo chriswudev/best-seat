@@ -20,6 +20,20 @@ class Api::SeatController < ApplicationController
   # GET /seat/best/:count
   def best_seats
     count = params[:count].to_i
+
+    data = get_best_seats(count)
+    render json: data
+  end
+
+  # DELETE /seat/
+  def reset
+    Seat.delete_all
+    render json: { notice: "Deleted All Seats." }
+  end
+
+  private
+
+  def get_best_seats(count)
     @seats = Seat.all.order(id: :asc)
     seat_pairs = []
     @seats.each { |seat|
@@ -45,12 +59,6 @@ class Api::SeatController < ApplicationController
       data.push(seat[:seat])
       break if data.count >= count
     }
-    render json: data
-  end
-
-  # DELETE /seat/
-  def reset
-    Seat.delete_all
-    render json: { notice: "Deleted All Seats." }
+    return data
   end
 end

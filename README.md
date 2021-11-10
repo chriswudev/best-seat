@@ -25,3 +25,7 @@ Rails app for finding best seats available
 ### Run project
 
 - `rails s`
+
+### Run test
+
+- `rails t`
