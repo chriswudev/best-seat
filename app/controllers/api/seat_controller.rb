@@ -3,7 +3,7 @@ class Api::SeatController < ApplicationController
 
   # GET /seat
   def index
-    @seats = Seat.all.order(brand: :asc)
+    @seats = Seat.all.order(id: :asc)
     render json: @seats
   end
 
@@ -20,7 +20,7 @@ class Api::SeatController < ApplicationController
   # GET /seat/best/:count
   def best_seats
     count = params[:count].to_i
-    @seats = Seat.all.order(brand: :asc)
+    @seats = Seat.all.order(id: :asc)
     seat_pairs = []
     @seats.each { |seat|
       pair = "#{seat.row}-#{seat.column}"

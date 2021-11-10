@@ -4,7 +4,7 @@ class Api::MoviesController < ApplicationController
 
   # GET /movies
   def index
-    @movies = Movie.all.order(brand: :asc)
+    @movies = Movie.all.order(id: :asc)
     render json: @movies
   end
 
