@@ -50,7 +50,7 @@ export default function MovieMoreMenu({ movie, fetchMovies }) {
           }
           throw new Error('Something went wrong.');
         })
-        .catch((err) => message.error('Error: ' + err));
+        .catch((err) => console.error('Error: ' + err));
     }
     setOpenDeleteModal(false);
   };

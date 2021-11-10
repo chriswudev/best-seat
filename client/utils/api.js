@@ -32,4 +32,37 @@ const deleteMovie = (id) => {
   });
 };
 
-export { getMovies, addMovie, updateMovie, deleteMovie };
+const getSeats = () => {
+  return fetch(getUrl('/seat/index'));
+};
+
+const getBestSeats = (count) => {
+  return fetch(getUrl(`/seat/best/${count}`));
+};
+
+const addSeats = (values) => {
+  return fetch(getUrl('/seat/'), {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(values),
+  });
+};
+
+const resetSeats = () => {
+  return fetch(getUrl('/seat/'), {
+    method: 'delete',
+  });
+};
+
+export {
+  getMovies,
+  addMovie,
+  updateMovie,
+  deleteMovie,
+  getSeats,
+  getBestSeats,
+  addSeats,
+  resetSeats,
+};

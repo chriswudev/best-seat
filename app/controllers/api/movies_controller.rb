@@ -3,14 +3,12 @@ class Api::MoviesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   # GET /movies
-  # GET /movies.json
   def index
     @movies = Movie.all.order(brand: :asc)
     render json: @movies
   end
 
   # GET /movies/1
-  # GET /movies/1.json
   def show
     if @movie
       render json: @movie
@@ -29,7 +27,6 @@ class Api::MoviesController < ApplicationController
   end
 
   # POST /movies
-  # POST /movies.json
   def create
     @movie = Movie.new(movie_params)
 
@@ -41,7 +38,6 @@ class Api::MoviesController < ApplicationController
   end
 
   # PATCH/PUT /movies/1
-  # PATCH/PUT /movies/1.json
   def update
     respond_to do |format|
       if @movie.update(movie_params)
@@ -53,7 +49,6 @@ class Api::MoviesController < ApplicationController
   end
 
   # DELETE /movies/1
-  # DELETE /movies/1.json
   def destroy
     @movie.destroy
     render json: { notice: "Deleted Movie." }

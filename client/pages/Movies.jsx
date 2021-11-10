@@ -101,7 +101,7 @@ export default function Movies() {
       .then((data) => {
         setMovies([...data]);
       })
-      .catch((err) => message.error('Error: ' + err));
+      .catch((err) => console.error('Error: ' + err));
   };
 
   const handleClick = (event, name) => {
