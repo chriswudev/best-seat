@@ -54,11 +54,41 @@ class Api::SeatController < ApplicationController
       }
     }
     sorted = seat_reference.sort_by { |reference| reference[:distance] }
+
+    current_row = 0
+    data = get_group_seats(sorted, count, current_row)
+    return data
+  end
+
+  def get_group_seats(seats, count, row)
     data = []
-    sorted.each { |seat|
-      data.push(seat[:seat])
-      break if data.count >= count
+    max_col = 0
+    min_col = 0
+    seats.each { |seat|
+      if row == seat[:seat][0]
+        if data.count == 0
+          data.push(seat[:seat])
+          current_col = seat[:seat][1]
+          max_col = min_col = current_col
+        else
+          current_col = seat[:seat][1]
+          diff_left = min_col - current_col
+          diff_right = current_col - max_col
+          if diff_left.abs == 1 || diff_right.abs == 1
+            data.push(seat[:seat])
+            if current_col < min_col
+              min_col = current_col
+            else
+              max_col = current_col
+            end
+          end
+        end
+        break if data.count >= count
+      end
     }
+    if data.count < count && row < (BestSeat::Column - 1)
+      data = get_group_seats(seats, count, row + 1)
+    end
     return data
   end
 end
